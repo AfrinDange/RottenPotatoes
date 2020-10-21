@@ -6,6 +6,11 @@
 
 require('./bootstrap');
 
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+
+import 'jquery-ui/ui/widgets/datepicker.js';
+
 window.Vue = require('vue');
 
 /**
@@ -30,3 +35,14 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+//datepicker by id="datepicker"
+$('.datepicker').datepicker({
+    weekStart: 0,
+    altFormat: "yy-mm-dd",
+    changeYear: true,
+    //daysOfWeekHighlighted: "6,0",
+    autoclose: true,
+    todayHighlight: true,
+});
+$('.datepicker').datepicker("setDate", new Date());
