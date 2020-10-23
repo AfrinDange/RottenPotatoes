@@ -46,3 +46,17 @@ $('.datepicker').datepicker({
     todayHighlight: true,
 });
 $('.datepicker').datepicker("setDate", new Date());
+
+//adds active class to link of the current page
+$(function(){
+    $('a').each(function(){
+        if ($(this).prop('href') == window.location.href) {
+            $(this).addClass('active'); $(this).parents('li').addClass('active');
+        }
+    });
+});
+
+//to display avatar on registration page
+$(document).on('change', '#avatar', function () {
+    $('#avatarImg').attr("src", $( this ).find( "option:selected" ).data( "img-src" ));
+});

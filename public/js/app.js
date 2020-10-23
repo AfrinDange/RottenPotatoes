@@ -51981,7 +51981,23 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()('.datepicker').datepicker({
   autoclose: true,
   todayHighlight: true
 });
-jquery__WEBPACK_IMPORTED_MODULE_0___default()('.datepicker').datepicker("setDate", new Date());
+jquery__WEBPACK_IMPORTED_MODULE_0___default()('.datepicker').datepicker("setDate", new Date()); //adds active class to link of the current page
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('a').each(function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prop('href') == window.location.href) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass('active');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parents('li').addClass('active');
+    }
+  });
+}); //to display avatar on registration page
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', '#avatar', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#avatarImg').attr("src", jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find("option:selected").data("img-src"));
+}); // function getAvatar() {
+//     avatarID = document.getElementById('avatar').value;
+//     return '/images/avatar'+avatarID+'.png';
+// }
 
 /***/ }),
 
@@ -52117,8 +52133,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\dange\Desktop\RottenPotatoes\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\dange\Desktop\RottenPotatoes\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\dange\Desktop\rottenpotatoes\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\dange\Desktop\rottenpotatoes\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

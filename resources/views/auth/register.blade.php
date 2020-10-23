@@ -10,23 +10,23 @@
 
             <div class="col-lg-6 col-md-12">
                 <div class="input-group mb-4 d-flex align-items-center">
-                    <img src="/images/avatar1.png" class = " mr-2 d-flex-inline img-fluid img-thumbnail rounded-circle" 
+                    <img id="avatarImg" src="/images/avatar1.png" class = " mr-2 d-flex-inline img-fluid img-thumbnail rounded-circle" 
                         width = 100 height = 100 alt="">
                     <div class="pt-3 form-group">
                         <div class="input-group-prepend">
                             <label for="avatar" id="avatarlabel" class="input-group-text">{{ __('Avatar') }}</label>
                             <select id="avatar" class="form-control" placeholder="avatar" name="avatar" 
                                             value="{{ old('avatar') }}" aria-label="avatarlabel" aria-describedby="avatarlabel" required autocomplete="avatar" autofocus>
-                                    <option value = "1" >Avatar 1</option>
-                                    <option value = "2" >Avatar 2</option>
-                                    <option value = "3" >Avatar 3</option>
-                                    <option value = "4" >Avatar 4</option>
-                                    <option value = "5" >Avatar 5</option>
-                                    <option value = "6" >Avatar 6</option>
-                                    <option value = "7" >Avatar 7</option>
-                                    <option value = "8" >Avatar 8</option>
-                                    <option value = "9" >Avatar 9</option>
-                                    <option value = "10" >Avatar 10</option>
+                                    <option value = "1" data-img-src="/images/avatar1.png">Avatar 1</option>
+                                    <option value = "2" data-img-src="/images/avatar2.png">Avatar 2</option>
+                                    <option value = "3" data-img-src="/images/avatar3.png">Avatar 3</option>
+                                    <option value = "4" data-img-src="/images/avatar4.png">Avatar 4</option>
+                                    <option value = "5" data-img-src="/images/avatar5.png">Avatar 5</option>
+                                    <option value = "6" data-img-src="/images/avatar6.png">Avatar 6</option>
+                                    <option value = "7" data-img-src="/images/avatar7.png">Avatar 7</option>
+                                    <option value = "8" data-img-src="/images/avatar8.png">Avatar 8</option>
+                                    <option value = "9" data-img-src="/images/avatar9.png">Avatar 9</option>
+                                    <option value = "10"data-img-src="/images/avatar10.png" >Avatar 10</option>
                             </select>
                         </div>
                     </div>
