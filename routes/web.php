@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\SeriesController;
+use App\Http\Controllers\ActorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +33,8 @@ Route::get('/movies', [MovieController::class,'getMovieCard'])->name('movies.get
 
 Route::get('/movies/{imdbID}', [MovieController::class, 'getMovieDetails'])->name('movies.getMovieDetails');
 
+Route::get('tvseries', [SeriesController::class, 'getSeriesCard'])->name('tvseries.getSeriesCard');
 
+Route::get('tvseries/{imdbID}', [SeriesController::class, 'getSeriesDetails'])->name('tvseries.getSeriesDetails');
 
+Route::get('actor/{imdbID}', [ActorController::class, 'getActorData'])->name('actor.getActorData');
