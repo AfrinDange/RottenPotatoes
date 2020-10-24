@@ -67,22 +67,23 @@
                                 <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
                             @endif
                         </div>
-                    </li>
-                    <li class="nav-item dropdown">
                         @else
+                        <li class="nav-item dropdown">
                             <a id="navbarDropdown1" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span v-pre>{{ Auth::user()->name }}</span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right m-3 alert alert-danger" aria-labelledby="navbarDropdown1">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
+                            <div class="dropdown-menu  m-3" aria-labelledby="navbarDropdown1">
+                                    <a  class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                    <a class="dropdown-item" href="/home">{{ __('View Profile') }}</a>
                             </div>
+                        </li>
                         @endguest
                     </li>
                 </ul>
@@ -91,7 +92,7 @@
                     <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
-        </nav>        
+        </nav>      
     </div>
     <main>
         @yield('content')
