@@ -32,8 +32,14 @@ class SeriesController extends Controller
             $dataURI = (string) base64_encode($role->headshot);
             $role->headshot = $dataURI;
         }
+
+        //get reviews
+        $reviews = DB::select('SELECT username, avatar, title, content, rating, userID, tvseriesimdbID
+                                FROM tvseriesreview, userdetails 
+                                WHERE userdetails.id = tvseriesreview.userID AND tvseriesimdbID = ?', [$imdbID]);
         return view('series')
                         ->with('series', $series)
-                        ->with('cast', $cast);
+                        ->with('cast', $cast)
+                        ->with('reviews', $reviews);
     }
 }

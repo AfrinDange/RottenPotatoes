@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\ActorController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,7 @@ Route::get('tvseries', [SeriesController::class, 'getSeriesCard'])->name('tvseri
 Route::get('tvseries/{imdbID}', [SeriesController::class, 'getSeriesDetails'])->name('tvseries.getSeriesDetails');
 
 Route::get('actor/{imdbID}', [ActorController::class, 'getActorData'])->name('actor.getActorData');
+
+Route::any('addmoviereview/{imdbID}', [ReviewController::class, 'addMovieReview'])->name('addmoviereview');
+
+Route::any('addseriesreview/{imdbID}', [ReviewController::class, 'addSeriesReview'])->name('addseriesreview');

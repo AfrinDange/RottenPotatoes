@@ -34,8 +34,14 @@ class MovieController extends Controller
             $dataURI = (string) base64_encode($tup->headshot);
             $tup->headshot = $dataURI;
         }
+
+        //get reviews
+        $reviews = DB::select('SELECT username, avatar, title, content, rating, userID, movieimdbID
+                                FROM moviesreview, userdetails 
+                                WHERE userdetails.id = moviesreview.userID AND movieimdbID = ?', [$imdbID]);
         return view('movie')
                     ->with('movie', $movie)
-                    ->with('cast', $cast);
+                    ->with('cast', $cast)
+                    ->with('reviews', $reviews);
     }
 }

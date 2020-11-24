@@ -61,111 +61,73 @@
         <div class = "p-5">
             <h3 class="font-weight-bolder">Reviews: </h3>
             <div class = "container mb-5"> 
-                <form action="">
+                <form method="POST" action="{{ route('addmoviereview', [ 'imdbID' => $movie[0]->imdbID ]) }}">
+                    @csrf
+
                     <label for="basic-url">Write your review: </label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon3">Title</span>
+                            <span class="input-group-text" id="rtitle">Title</span>
                         </div>
-                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                        <input type="text" class="form-control" id="reviewTitle" name="title" required="" aria-describedby="rtitle">
                     </div>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">Content</span>
                         </div>
-                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                        <textarea class="form-control" id="reviewContent" name="content" aria-label="With textarea"></textarea>
                     </div>
                     <div class="pt-4">
-                        <div>
-                            <h6 class="font-weight-bolder">Your rating: <span>7</span></h6>
-                        </div>
                         <div class="form-group">
-                            <label for="formControlRange">Example Range input</label>
-                            <input type="range" class="form-control-range" id="formControlRange">
+                            <label for="formControlRange">Your rating: </label>
+                            <input type="range" class="form-control-range" name="rating" id="reviewRating">
                         </div>
                     </div>
-                    <input class = " mt-3 btn btn-dark btn-md" type="button" value="submit">
+                    @if (isset($response))
+                        <div class="alert-danger p-1 m-2">{{ $response }}</div>
+                    @endif
+                    @if (Auth::guest())
+                        <div class="alert-danger p-1 m-2">YOU NEED TO LOG IN TO ADD A REVIEW!</div>
+                        <button class ="mt-3 btn btn-dark btn-md" type="submit" disabled>Submit</button>
+                    @else 
+                        <button class ="mt-3 btn btn-dark btn-md" type="submit">Submit</button>
+                    @endif
                 </form>
             </div>
-        <div class="accordion" id="accordionExample">
+        
+        <div class="accordion" id="reviewsection"> 
+            @foreach ($reviews as $review)
             <div class="card bg-transparent">
-                <div class="card-header" id="headingOne">
+                <div class="card-header" id="title">
                     <div class = "row p-3">
                         <div class="col-lg-2 col-md-4">
                             <div class="d-flex">
-                                <img src="https://s3.cointelegraph.com/storage/uploads/view/bad02e8b57a64d349aa5eec318298b4b.png" 
+                                <img src="{{ '/images/avatar'.$review->avatar.'.png' }}" 
                                     width = 120 height = 120 alt="" style = "margin: auto;" class="d-flex justify-content-center img-fluid img-thumbnail rounded-circle">
                             </div>
                         </div>
                         <div class="col-lg-10 col-md-8 d-flex">
                             <div class = "d-flex flex-column justify-content-start">
-                                <h6 class="">canine_joe says, </h6>
-                                <h4 class="font-weight-bolder">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae, voluptates.</h4>
-                                <button class="btn btn-link text-left m-0 p-0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <p style="font-size: 2rem"><a class="text-decoration-none" href="#">{{ $review->username}}</a> says,</p>
+                                <h4 class="font-weight-bolder">{{ $review->title}}</h4>
+                                <div class="d-flex">
+                                    <label class="font-weight-bolder" for="rating">Ratings:</label>
+                                    <div id="rating" class="progress bg-light m-1" style="width: 200px">
+                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="{{ 'width: '.$review->rating.'%' }}" aria-valuenow="{{$review->rating }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-link text-left m-0 p-0" type="button" data-toggle="collapse" data-target="{{ '#reviewby'.$review->userID }}" aria-expanded="true" aria-controls="{{ 'reviewby'.$review->userID }}">
                                 read more . . . 
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
+                <div id="{{ 'reviewby'.$review->userID }}" class="collapse" aria-labelledby="title" data-parent="#reviewsection">
+                    <div class="card-body">{{ $review->content }}</div>
                 </div>
             </div>
-            <div class="card bg-transparent">
-                <div class="card-header" id="headingTwo">
-                    <div class = "row p-3">
-                        <div class="col-lg-2 col-md-4">
-                            <div class="d-flex">
-                                <img src="https://www.thisdogslife.co/wp-content/uploads/2019/02/dog-grasshopper.png" 
-                                    width = 120 height = 120 alt="" style = "margin: auto;" class="d-flex justify-content-center img-fluid img-thumbnail rounded-circle">
-                            </div>
-                        </div>
-                        <div class="col-lg-10 col-md-8 d-flex">
-                            <div class = "d-flex flex-column justify-content-start">
-                                <h6 class="">sue_marie says, </h6>
-                                <h4 class="font-weight-bolder">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae, voluptates.</h4>
-                                <button class="btn btn-link text-left m-0 p-0" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                read more . . . 
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
-                </div>
-            </div>
-            <div class="card bg-transparent">
-                <div class="card-header" id="headingThree">
-                    <div class = "row p-3">
-                        <div class="col-lg-2 col-md-4">
-                            <div class="d-flex">
-                                <img src="https://s3.cointelegraph.com/storage/uploads/view/bad02e8b57a64d349aa5eec318298b4b.png" 
-                                    width = 120 height = 120 alt="" style = "margin: auto;" class="d-flex justify-content-center img-fluid img-thumbnail rounded-circle">
-                            </div>
-                        </div>
-                        <div class="col-lg-10 col-md-8 d-flex">
-                            <div class = "d-flex flex-column justify-content-start">
-                                <h6 class="">canine_joe says, </h6>
-                                <h4 class="font-weight-bolder">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae, voluptates.</h4>
-                                <button class="btn btn-link text-left m-0 p-0" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                read more . . . 
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>    
 </div>
