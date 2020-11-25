@@ -13,8 +13,13 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
                     {{ __('You are logged in!') }}
+                    <div class="row d-flex">
+                        <div class="col-3">
+                            <img src="/images/avatar1.png" alt="" width = 150 height = 150 alt="" style = "margin: auto;"
+                             class="d-flex justify-content-center bg-primary img-fluid img-thumbnail rounded-circle">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

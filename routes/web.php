@@ -6,6 +6,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\ActorController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +27,6 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// Route::get('/movies', function () {
-//     return view('movielist');
-// });
-
 Route::get('/movies', [MovieController::class,'getMovieCard'])->name('movies.getMovieCard');
 
 Route::get('/movies/{imdbID}', [MovieController::class, 'getMovieDetails'])->name('movies.getMovieDetails');
@@ -43,3 +40,5 @@ Route::get('actor/{imdbID}', [ActorController::class, 'getActorData'])->name('ac
 Route::any('addmoviereview/{imdbID}', [ReviewController::class, 'addMovieReview'])->name('addmoviereview');
 
 Route::any('addseriesreview/{imdbID}', [ReviewController::class, 'addSeriesReview'])->name('addseriesreview');
+
+Route::get('/search', [SearchController::class, 'search'])->name('search');
