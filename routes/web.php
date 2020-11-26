@@ -7,6 +7,7 @@ use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\ActorController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,7 @@ Route::any('addmoviereview/{imdbID}', [ReviewController::class, 'addMovieReview'
 Route::any('addseriesreview/{imdbID}', [ReviewController::class, 'addSeriesReview'])->name('addseriesreview');
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
+
+Route::get('userprofile/{username}', [UserController::class, 'getUserDetails'])->name('userprofile.getUserDetails');
+
+Route::any('/deletemoviereview', [UserController::class, 'deleteMovieReview'])->name('deletemoviereview');

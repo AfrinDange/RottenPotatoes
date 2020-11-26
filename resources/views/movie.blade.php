@@ -108,7 +108,7 @@
                         </div>
                         <div class="col-lg-10 col-md-8 d-flex">
                             <div class = "d-flex flex-column justify-content-start">
-                                <p style="font-size: 2rem"><a class="text-decoration-none" href="#">{{ $review->username}}</a> says,</p>
+                                <p style="font-size: 2rem"><a class="text-decoration-none" href="../userprofile/{{ $review->username }}">{{ $review->username}}</a> says,</p>
                                 <h4 class="font-weight-bolder">{{ $review->title}}</h4>
                                 <div class="d-flex">
                                     <label class="font-weight-bolder" for="rating">Ratings:</label>

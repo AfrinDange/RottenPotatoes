@@ -4,29 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use DB;
 
-class HomeController extends Controller
-{
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
+class UserController extends Controller
+{
+    //displays user details and reviews for other users to see
+    public function getUserDetails($username)
     {
-        $userID = Auth::id();
-        $userdetails = DB::select('SELECT name, avatar, username, email, id
+        $userID = DB::select('SELECT id
+                                FROM userdetails
+                                WHERE username = ?', [$username]); 
+        $userID = (string) $userID[0]->id;
+        $userdetails = DB::select('SELECT name, avatar, username, email
                                     FROM userdetails
                                     WHERE id = ?', [$userID]);
 
@@ -47,9 +38,18 @@ class HomeController extends Controller
             $dataURI = (string) base64_encode($review->poster);
             $review->poster = $dataURI;
         }
-        return view('home')
+        return view('userprofile')
                     ->with('userdetails', $userdetails)
                     ->with('moviesReview', $moviesReview)
                     ->with('tvseriesReview', $tvseriesReview);
+    }
+
+    //user can delete their review
+    public function deleteMovieReview(Request $request) {
+        $userID = $request->userID;
+        $movieimdbID = $request->movieimdbID;
+        DB::delete('DELETE FROM moviesreview 
+                    WHERE userid = ? AND movieimdbid = ?', [$userID, $movieimdbID]);
+        return redirect()->back();
     }
 }
