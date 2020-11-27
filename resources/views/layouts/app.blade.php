@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <a class="navbar-brand pl-3 pr-3 border-right" href="/">
                 <img src="/images/logo.png" 
                 width="40" height="40" alt="" loading="lazy">

@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <a class="navbar-brand pl-3 pr-3 border-right" href="/">
                 <img src="/images/logo.png" 
                 width="40" height="40" alt="" loading="lazy">
@@ -97,5 +97,18 @@
     <main>
         @yield('content')
     </main>
+    <footer class="">
+        <div class="collapse" id="navbarToggleExternalContent">
+          <div class="bg-dark p-4">
+            <h5 class="text-white h4">Developed with Laravel 8</h5>
+            <span class="text-muted">Data used is gathered from IMDb.</span>
+          </div>
+        </div>
+        <nav class="navbar navbar-dark bg-dark">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </nav>
+    </footer>
 </body>
 </html>

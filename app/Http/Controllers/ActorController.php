@@ -14,6 +14,32 @@ class ActorController extends Controller
         $dataURI = (string) base64_encode($actor[0]->headshot);
         $actor[0]->headshot = $dataURI;
 
+        //movies done
+        $movies = DB::select('SELECT title, poster, imdbID
+                                FROM movies
+                                WHERE imdbID in (SELECT movieimdbID
+                                                FROM moviescast
+                                                WHERE castimdbID = ?)', [$imdbID]);
+        
+        //encoding the blob of poster to dataURI format
+        foreach ($movies as $movie) {
+            $dataURI = (string) base64_encode($movie->poster);
+            $movie->poster = $dataURI;
+        }
+
+        //TVseries done
+        $tvseries = DB::select('SELECT title, poster, imdbID
+                                FROM tvseries
+                                WHERE imdbID in (SELECT tvseriesimdbID
+                                                FROM tvseriescast
+                                                WHERE castimdbID = ?)', [$imdbID]);
+
+        //encoding the blob of poster to dataURI format                                      
+        foreach ($tvseries as $show) {
+            $dataURI = (string) base64_encode($show->poster);
+            $show->poster = $dataURI;
+        }
+
         //formatting lists
         $toremove = ["[", "]", "\\"];
         $replacewith = ["", "", ""];
@@ -31,9 +57,9 @@ class ActorController extends Controller
         $actor[0]->quotes = explode("\",", $actor[0]->quotes);
         $actor[0]->bio = explode("::", $actor[0]->bio);
 
-        //formatting quotes
-        //return $actor[0]->quotes;
         return view('actor')
-                        ->with('actor', $actor);
+                        ->with('actor', $actor)
+                        ->with('movies', $movies)
+                        ->with('tvseries', $tvseries);
     }
 }
