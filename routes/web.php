@@ -47,3 +47,5 @@ Route::get('/search', [SearchController::class, 'search'])->name('search');
 Route::get('userprofile/{username}', [UserController::class, 'getUserDetails'])->name('userprofile.getUserDetails');
 
 Route::any('/deletemoviereview', [UserController::class, 'deleteMovieReview'])->name('deletemoviereview');
+
+Route::any('/deletetvseriesreview', [UserController::class, 'deleteTvseriesReview'])->name('deletetvseriesreview');

@@ -44,12 +44,21 @@ class UserController extends Controller
                     ->with('tvseriesReview', $tvseriesReview);
     }
 
-    //user can delete their review
+    //user can delete their movie review
     public function deleteMovieReview(Request $request) {
         $userID = $request->userID;
         $movieimdbID = $request->movieimdbID;
         DB::delete('DELETE FROM moviesreview 
                     WHERE userid = ? AND movieimdbid = ?', [$userID, $movieimdbID]);
+        return redirect()->back();
+    }
+
+    //user can delete their tvseries review
+    public function deleteTvseriesReview(Request $request) {
+        $userID = $request->userID;
+        $tvseriesimdbID = $request->tvseriesimdbID;
+        DB::delete('DELETE FROM tvseriesreview 
+                    WHERE userid = ? AND tvseriesimdbid = ?', [$userID, $tvseriesimdbID]);
         return redirect()->back();
     }
 }

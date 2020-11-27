@@ -41,8 +41,13 @@
             @foreach ($actors as $actor)
             <div class="col-md-2 col-sm-4 d-inline-flex p-2 justify-content-center">
                 <div class="card border border-dark shadow" style="width: 10rem;">
-                    <img src="data:image/png;base64, {{ $actor->headshot }}"
+                @if ($actor->headshot == "")
+                    <img src="/images/placeholder.png"
                         class="card-img-top" alt="...">
+                @else
+                    <img src="data:image/png;base64, {{ $actor->headshot }}"
+                    class="card-img-top" alt="...">
+                @endif
                     <div class="card-body">
                     <a href="/actor/{{$actor->imdbID}}" class="">{{ $actor->name }}</a>
                     </div>

@@ -52,7 +52,7 @@
                                     </button>
                                     <form method="POST" action="{{ route('deletemoviereview', ['userID' => $userdetails[0]->id, 'movieimdbID' => $review->movieimdbID]) }}">
                                         @csrf
-                                        <button class="p-1 mr-3 btn btn-outline-danger"><img width=25 height=25 src="/images/delete.png" alt="delete review"></button>
+                                        <button class="p-1 mr-3 btn btn-outline-danger" onclick="return confirm('Are you sure?')"><img width=25 height=25 src="/images/delete.png" alt="delete review"></button>
                                     </form>
                                 </div>
                             </div>
@@ -86,8 +86,9 @@
                                     <button class="btn btn-link text-left m-0 p-0 font-weight-bold" type="button" data-toggle="collapse" data-target="{{ '#reviewby'.$review->tvseriesimdbID }}" aria-expanded="true" aria-controls="{{ 'reviewby'.$review->tvseriesimdbID }}">
                                         read more . . . 
                                     </button>
-                                    <form method="POST" action="">
-                                        <button class="p-1 mr-3 btn btn-outline-danger"><img width=25 height=25 src="/images/delete.png" alt="delete review"></button>
+                                    <form method="POST" action="{{ route('deletetvseriesreview', ['userID' => $userdetails[0]->id, 'tvseriesimdbID' => $review->tvseriesimdbID]) }}">
+                                        @csrf
+                                        <button class="p-1 mr-3 btn btn-outline-danger" onclick="return confirm('Are you sure?')"><img width=25 height=25 src="/images/delete.png" alt="delete review"></button>
                                     </form>
                                 </div>
                             </div>
