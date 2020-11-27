@@ -94,7 +94,7 @@
             </div>
         </nav>      
     </div>
-    <main>
+    <main class="pt-5 mt-3">
         @yield('content')
     </main>
     <footer class="">
