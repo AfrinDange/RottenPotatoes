@@ -10,7 +10,8 @@ class SeriesController extends Controller
 {
     //Fetches all Tv series list
     public function getSeriesCard() {
-        $series = Series::all('title', 'imdbID', 'poster');
+        $series = Series::all('title', 'imdbID', 'poster')
+                                ->sortBy('title');
         foreach ($series as $show) {
             //encoded to dataURL format to add to the html tag
             $dataURI = (string) base64_encode($show->poster);
@@ -21,11 +22,15 @@ class SeriesController extends Controller
 
     //fetches TV series details along with cast
     public function getSeriesDetails($imdbID) {
-        $series = DB::select('SELECT * FROM tvseries WHERE imdbID = ?', [$imdbID]);
+        $series = DB::select('SELECT * 
+                                FROM tvseries 
+                                WHERE imdbID = ?', [$imdbID]);
+
         $cast = DB::select('SELECT imdbID, role, name, headshot
                             FROM tvseriescast
                                 INNER JOIN actor ON tvseriescast.castimdbID = actor.imdbID
-                                WHERE tvseriesimdbID = ?', [$imdbID]);
+                                WHERE tvseriesimdbID = ?
+                                ORDER BY name ASC', [$imdbID]);
         $dataURI = (string) base64_encode($series[0]->poster);
         $series[0]->poster = $dataURI;
         foreach ($cast as $role) {

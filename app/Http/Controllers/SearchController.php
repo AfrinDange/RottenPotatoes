@@ -15,16 +15,19 @@ class SearchController extends Controller
             $movies = DB::table('movies')
                     ->select('title', 'poster', 'imdbID')
                     ->where('title','LIKE','%'.$search_text.'%')
+                    ->orderBy('title', 'asc')
                     ->get();
 
             $actors = DB::table('actor')
                     ->select('name', 'headshot', 'imdbID')
                     ->where('name','LIKE','%'.$search_text.'%')
+                    ->orderBy('name', 'asc')
                     ->get();
                     
             $tvseries = DB::table('tvseries')
                     ->select('title', 'poster','imdbID')
                     ->where('title','LIKE','%'.$search_text.'%')
+                    ->orderBy('title', 'asc')
                     ->get();
                     //->unionAll($movies)
                     //->unionAll($actors);
